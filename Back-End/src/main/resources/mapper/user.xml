@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.dao.UserDao">
+	
+	<insert id="insert" parameterType="user">
+		insert into user(id, password, name, email) 
+		values(#{id}, #{password}, #{name}, #{email})
+	</insert>
+	
+	<select id="search" parameterType="user" resultType="user">
+		select * from user 
+		where id = #{id} and password = #{password}
+	</select>
+	
+	<update id="update" parameterType="user">
+		update user 
+		set password = #{password}, name = #{name}, email = #{email} 
+		where id = #{id}
+	</update>
+	
+	<delete id="remove" parameterType="string">
+		delete from user 
+		where id = #{id}
+	</delete>
+	
+	<select id="findPassword" parameterType="user">
+		select password 
+		from user 
+		where id = #{id} and name = #{name} and email = #{email}
+	</select>
+
+</mapper>

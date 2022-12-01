@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.dao.HouseDao">
+
+	<!-- 아파트이름으로 매물 검색하기 -->
+	<select id="searchByApt" parameterType="string"
+		resultType="house">
+		select * from houseinfo info join housedeal deal on
+		info.aptCode =
+		deal.aptCode where aptName like #{aptName}
+	</select>
+
+	<!-- dongcode로 매물 검색하기 -->
+	<select id="searchByDong" parameterType="string"
+		resultType="house">
+		select * from houseinfo info join housedeal deal on
+		info.aptCode =
+		deal.aptCode where dongCode=#{dongCode}
+	</select>
+
+	<!-- 매물번호로 거래 정보 detail 확인 -->
+	<select id="searchByNo" parameterType="int" resultType="house">
+		select * from houseinfo info join housedeal deal on info.aptCode =
+		deal.aptCode where no=#{no}
+	</select>
+	
+	<!--  dongCode 검색해서 전체 주소 정보 받아오기 (시, 구, 동 이름 받아오기) -->
+	<select id="searchAddressName" parameterType="string" resultType="string">
+		select * from dongcode where dongCode=#{dongCode};
+	</select>
+</mapper>
